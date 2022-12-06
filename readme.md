@@ -16,9 +16,46 @@ The robot used is the Turtlebot3 Burger.
 - ROS2 (Humble Hawksbill Binary Install)
 - Ubuntu 22.04 LTS
 
-## Reference
+# Build Package
+```
+source /opt/ros/humble/setup.bash  # Source your ROS2 Installation
+cd <Your ROS2 workspace src folder>
+git clone https://github.com/Sanchitkedia/walker.git
+cd ..
+rosdep install -i --from-path src --rosdistro humble -y #Check for missing dependencies
+colcon build --packages-select walker
+```
 
-[1] [ROS2 Humble Hawksbill Tutorials](http://docs.ros.org/en/humble/Tutorials.html)
+## Run Package
+```
+cd <Your ROS2 workspace>
+source /opt/ros/humble/setup.bash  # Source your ROS2 Installation
+source . install/setup.bash #Source the setup files
+ros2 launch roomba.launch 
+ros2 launch roomba.launch record:=True # Run this to launch with bag recording
+```
+
+### To Play data from rosbag file or check the informating in the bag file
+```
+cd <Your ROS2 workspace>
+source /opt/ros/humble/setup.bash  # Source your ROS2 Installation
+source . install/setup.bash #Source the setup files
+ros2 bag info src/walker/bagfiles/walker_bagfile #To check the information in the bagfile
+ros2 bag play src/walker/bagfiles/walker_bagfile #To play the bagfile
+```
+## Cpplint
+```
+pip3 install cpplint # If not already installed
+cd <Your ROS2 workspace>/src/walker/src
+cpplint --filter=-build/c++11,+build/c++17,-build/namespaces,-build/include_order walker_node.cpp > ../results/walker_node_cpp.txt
+```
+
+## Cppcheck
+```
+sudo apt-get install cppcheck # If not already installed
+cd <Your ROS2 workspace>/src/walker/src
+cppcheck --enable=all --std=c++17 --force --suppress=missingIncludeSystem walker_node.cpp > ../results/cppcheck.txt
+```
 
 ## License
 
