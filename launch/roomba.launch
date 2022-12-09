@@ -4,8 +4,6 @@
 
     <include file= "src/walker/launch/turtlebot3_world.launch.py"/> // launch turtlebot3 world 
 
-    <set_env name="TURTLEBOT3_MODEL" value="burger"/> // set turtlebot3 model
-
     <node pkg="walker" exec="WALKER" name="walker" output="screen"/> // launch walker node 
 
     <executable cmd="ros2 bag record -a --output src/walker/bagfiles/$(var bag_name)" if="$(var record)"/> // record rosbag
