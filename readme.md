@@ -30,16 +30,17 @@ colcon build --packages-select walker
 ```
 cd <Your ROS2 workspace>
 source /opt/ros/humble/setup.bash  # Source your ROS2 Installation
-source . install/setup.bash #Source the setup files
-ros2 launch roomba.launch 
-ros2 launch roomba.launch record:=True # Run this to launch with bag recording
+. install/setup.bash #Source the setup files
+export TURTLEBOT3_MODEL=burger #export model name
+ros2 launch walker roomba.launch 
+ros2 launch walker roomba.launch record:=True # Run this to launch with bag recording
 ```
 
 ### To Play data from rosbag file or check the informating in the bag file
 ```
 cd <Your ROS2 workspace>
 source /opt/ros/humble/setup.bash  # Source your ROS2 Installation
-source . install/setup.bash #Source the setup files
+. install/setup.bash #Source the setup files
 ros2 bag info src/walker/bagfiles/walker_bagfile #To check the information in the bagfile
 ros2 bag play src/walker/bagfiles/walker_bagfile #To play the bagfile
 ```
